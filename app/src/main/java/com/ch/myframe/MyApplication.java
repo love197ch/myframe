@@ -33,7 +33,7 @@ public class MyApplication extends Application {
 //        //bugly
 //        CrashReport.initCrashReport(getApplicationContext(), "ae58aa2931", false);
 //        //LeakCanary
-//        LeakCanary.install(this);12
+//        LeakCanary.install(this);
     }
 
     public static AppComponent getAppComponent() {

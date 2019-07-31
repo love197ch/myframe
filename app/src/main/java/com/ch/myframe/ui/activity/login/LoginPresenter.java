@@ -47,8 +47,8 @@ public class LoginPresenter extends BaseMvpPresenter<LoginContract.View> impleme
 //            mView.httpError("请输入用户名密码");
 //            return;
 //        }
-        ApiService api = RetrofitUtils.getInstance(StaticVariable.URL).create(ApiService.class);
-        api.login("00d91e8e0cca2b76f515926a36db68f5", "13594347817", "123456")
+        RetrofitUtils.getInstance().create(ApiService.class)
+                .login("00d91e8e0cca2b76f515926a36db68f5", "13594347817", "123456")
                 .compose(RxSchedulers.io_main())
                 .as(AutoDispose.autoDisposable(AndroidLifecycleScopeProvider.from((LifecycleOwner) mView)))
                 .subscribe(new DefaultObserver<LoginResponse>((Context) mView) {

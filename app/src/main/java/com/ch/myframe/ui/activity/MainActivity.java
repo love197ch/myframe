@@ -87,10 +87,8 @@ public class MainActivity extends BaseActivity {
                 navHome.setTextColor(ContextCompat.getColor(this, R.color.main_menu_text_color_over));
                 if (homeFragment == null) {
                     homeFragment = new HomeFragment();
-                    addFragment(getSupportFragmentManager(), homeFragment.getClass(), R.id.fragment_container, null);
-                } else {
-                    addFragment(getSupportFragmentManager(), homeFragment.getClass(), R.id.fragment_container, null);
                 }
+                addFragment(getSupportFragmentManager(), homeFragment.getClass(), R.id.fragment_container, null);
                 break;
             case R.id.l_message:
                 unselected();
@@ -99,10 +97,8 @@ public class MainActivity extends BaseActivity {
                 navMessage.setTextColor(ContextCompat.getColor(this, R.color.main_menu_text_color_over));
                 if (messageFragment == null) {
                     messageFragment = new MessageFragment();
-                    addFragment(getSupportFragmentManager(), messageFragment.getClass(), R.id.fragment_container, null);
-                } else {
-                    addFragment(getSupportFragmentManager(), messageFragment.getClass(), R.id.fragment_container, null);
                 }
+                addFragment(getSupportFragmentManager(), messageFragment.getClass(), R.id.fragment_container, null);
                 break;
             case R.id.l_conference:
                 unselected();
@@ -111,10 +107,8 @@ public class MainActivity extends BaseActivity {
                 navConference.setTextColor(ContextCompat.getColor(this, R.color.main_menu_text_color_over));
                 if (conferenceFragment == null) {
                     conferenceFragment = new ConferenceFragment();
-                    addFragment(getSupportFragmentManager(), conferenceFragment.getClass(), R.id.fragment_container, null);
-                } else {
-                    addFragment(getSupportFragmentManager(), conferenceFragment.getClass(), R.id.fragment_container, null);
                 }
+                addFragment(getSupportFragmentManager(), conferenceFragment.getClass(), R.id.fragment_container, null);
                 break;
             case R.id.l_mine:
                 unselected();
@@ -123,10 +117,8 @@ public class MainActivity extends BaseActivity {
                 navMine.setTextColor(ContextCompat.getColor(this, R.color.main_menu_text_color_over));
                 if (mineFragment == null) {
                     mineFragment = new MineFragment();
-                    addFragment(getSupportFragmentManager(), mineFragment.getClass(), R.id.fragment_container, null);
-                } else {
-                    addFragment(getSupportFragmentManager(), mineFragment.getClass(), R.id.fragment_container, null);
                 }
+                addFragment(getSupportFragmentManager(), mineFragment.getClass(), R.id.fragment_container, null);
                 break;
         }
     }

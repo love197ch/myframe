@@ -47,7 +47,7 @@ public class RetrofitUtils {
             try {
                 mRetrofit = getRetrofit();
             } catch (Exception e) {
-                e.toString();
+                return null;
             }
         }
         return mRetrofit;
@@ -57,7 +57,8 @@ public class RetrofitUtils {
         try {
             mRetrofit = getRetrofit();
         } catch (Exception e) {
-            e.toString();
+            //当基础url格式错误时会报错
+            return null;
         }
         return mRetrofit;
     }

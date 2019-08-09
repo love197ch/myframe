@@ -47,7 +47,7 @@ public class RetrofitUtils {
             try {
                 mRetrofit = getRetrofit();
             } catch (Exception e) {
-                return null;
+                e.toString();
             }
         }
         return mRetrofit;

@@ -62,7 +62,7 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
     private void initData(){
         mySharedPreferences = new MySharedPreferences(this, "Shared");
         //初始化是否记住了密码
-        String u = mySharedPreferences.getValue("ic_main_user", "").toString();
+        String u = mySharedPreferences.getValue("user", "").toString();
         String p = mySharedPreferences.getValue("password", "").toString();
         StaticVariable.URL = mySharedPreferences.getValue("url", "https://www.apiopen.top").toString();
         if (!isEmpty(u) && !isEmpty(p)) {
@@ -82,7 +82,7 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
     @Override
     public void httpCallback(User user) {
         if (checkBox.isChecked()) {
-            mySharedPreferences.putValue("ic_main_user", inputLoginName.getText().toString());
+            mySharedPreferences.putValue("user", inputLoginName.getText().toString());
             mySharedPreferences.putValue("password", inputLoginPsw.getText().toString());
             mySharedPreferences.putValue("check", true);
         } else {

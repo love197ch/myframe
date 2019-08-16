@@ -6,12 +6,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ch.myframe.MyApplication;
+import com.ch.myframe.dragger.component.DaggerFragmentComponent;
+import com.ch.myframe.dragger.component.FragmentComponent;
+import com.ch.myframe.dragger.module.FragmentModule;
+
+import javax.inject.Inject;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.reactivex.annotations.Nullable;
 
 public abstract class BaseMvpFragment<P extends BaseMvpPresenter> extends BaseFragment implements BaseMvpCallback {
-
+    @Inject
+    @Nullable
     protected P mPresenter;
     protected View mRootView;
     protected Unbinder unbinder;
@@ -38,6 +46,13 @@ public abstract class BaseMvpFragment<P extends BaseMvpPresenter> extends BaseFr
         mPresenter.attachView(this);
         unbinder = ButterKnife.bind(this, view);
         initViewAndData();
+    }
+
+    protected FragmentComponent getFragmentComponent() {
+        return DaggerFragmentComponent.builder()
+                .appComponent(MyApplication.getAppComponent())
+                .fragmentModule(new FragmentModule(this))
+                .build();
     }
 
     public P getPresenter() {

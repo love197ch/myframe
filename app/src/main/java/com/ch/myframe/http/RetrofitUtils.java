@@ -14,9 +14,10 @@ import retrofit2.Retrofit;
 
 
 public class RetrofitUtils {
-    private static Retrofit mRetrofit;
+    private static volatile Retrofit mRetrofit;
     private HashMap<Class, Retrofit> mServiceHashMap = new HashMap<>();
     private ConcurrentHashMap<Class, Object> cachedApis = new ConcurrentHashMap<>();
+
     private static Retrofit getRetrofit() {
         // 创建 OKHttpClient
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
@@ -41,16 +42,25 @@ public class RetrofitUtils {
         return mRetrofit;
     }
 
-    public static synchronized Retrofit getInstance() {
+    public static Retrofit getInstance() {
         //在基础URL不变情况下可以使用单例模式
-        if (mRetrofit == null) {
-            try {
-                mRetrofit = getRetrofit();
-            } catch (Exception e) {
-                e.toString();
+        try {
+            if (mRetrofit == null) {
+                synchronized (RetrofitUtils.class) {
+                    mRetrofit = getRetrofit();
+                }
             }
+        } catch (Exception e) {
+            //当基础url格式错误时会报错
+            e.printStackTrace();
         }
         return mRetrofit;
+    }
+
+    private RetrofitUtils() {
+        if (mRetrofit != null) {
+            throw new RuntimeException("Use getInstance() method to get the single instance of this class.");
+        }
     }
 
     public static synchronized Retrofit changeUrl() {

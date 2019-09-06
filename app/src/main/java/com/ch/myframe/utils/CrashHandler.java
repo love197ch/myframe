@@ -4,6 +4,7 @@ package com.ch.myframe.utils;
  * Created by Administrator on 2018/1/25.
  */
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -27,11 +28,12 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * @ClassName: CrashHandler
- * @Description: UncaughtException处理类,当程序发生Uncaught异常的时候,有该类来接管程序,并记录发送错误报告.
+ * @Description: UncaughtException处理类, 当程序发生Uncaught异常的时候, 有该类来接管程序, 并记录发送错误报告.
  */
 public class CrashHandler implements UncaughtExceptionHandler {
 
@@ -54,22 +56,25 @@ public class CrashHandler implements UncaughtExceptionHandler {
     // 用于格式化日期,作为日志文件名的一部分
     private DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
 
-    /** 保证只有一个 CrashHandler 实例 */
+    /**
+     * 保证只有一个 CrashHandler 实例
+     */
     private CrashHandler() {
     }
 
-    /** 获取 CrashHandler 实例 ,单例模式 */
+    /**
+     * 获取 CrashHandler 实例 ,单例模式
+     */
     public static CrashHandler getInstance() {
         return INSTANCE;
     }
 
     /**
+     * @param context
+     * @param app     传入的app
+     * @throws
      * @Title: init
      * @Description: 初始化
-     * @param context
-     * @param app
-     *            传入的app
-     * @throws
      */
     public void init(Context context, MyApplication app) {
         // 传入app对象，为完美终止app
@@ -148,7 +153,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
      * 保存错误信息到文件中 *
      *
      * @param ex
-     * @return 返回文件名称,便于将文件传送到服务器
+     * @return 返回文件名称, 便于将文件传送到服务器
      */
     private String saveCrashInfo2File(Throwable ex) {
         StringBuffer sb = new StringBuffer();
@@ -173,7 +178,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
         try {
             long timestamp = System.currentTimeMillis();
             String time = formatter.format(new Date());
-            String fileName = "error-" + time + "-" + timestamp + ".log";
+            String fileName = getAppProcessName(mContext) + "-" + time + "-" + timestamp + ".log";
             if (Environment.getExternalStorageState().equals(
                     Environment.MEDIA_MOUNTED)) {
                 String path = Environment.getExternalStorageDirectory()
@@ -183,7 +188,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
                 if (!dir.exists()) {
                     dir.mkdirs();
                 }
-                FileOutputStream fos = new FileOutputStream(path  + "/"+ fileName);
+                FileOutputStream fos = new FileOutputStream(path + "/" + fileName);
                 fos.write(sb.toString().getBytes());
                 fos.flush();
                 fos.close();
@@ -196,6 +201,26 @@ public class CrashHandler implements UncaughtExceptionHandler {
         }
 
         return null;
+    }
+
+    /**
+     * 获取当前应用程序的包名
+     *
+     * @param context 上下文对象
+     * @return 返回包名
+     */
+    public static String getAppProcessName(Context context) {
+        //当前应用pid
+        int pid = android.os.Process.myPid();
+        //任务管理类
+        ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        //遍历所有应用
+        List<ActivityManager.RunningAppProcessInfo> infos = manager.getRunningAppProcesses();
+        for (ActivityManager.RunningAppProcessInfo info : infos) {
+            if (info.pid == pid)//得到当前应用
+                return info.processName;//返回包名
+        }
+        return "";
     }
 
 }

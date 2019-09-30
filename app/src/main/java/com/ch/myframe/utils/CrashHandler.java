@@ -176,14 +176,13 @@ public class CrashHandler implements UncaughtExceptionHandler {
         String result = writer.toString();
         sb.append(result);
         try {
-            long timestamp = System.currentTimeMillis();
             String time = formatter.format(new Date());
-            String fileName = getAppProcessName(mContext) + "-" + time + "-" + timestamp + ".log";
+            String fileName = getAppProcessName(mContext) + "-" + time + ".log";
             if (Environment.getExternalStorageState().equals(
                     Environment.MEDIA_MOUNTED)) {
                 String path = Environment.getExternalStorageDirectory()
                         .getAbsolutePath() + "/crashs";
-                Toast.makeText(mContext, path, Toast.LENGTH_LONG).show();
+
                 File dir = new File(path);
                 if (!dir.exists()) {
                     dir.mkdirs();

@@ -31,8 +31,8 @@ android {
     }
     applicationVariants.all { variant ->
         variant.outputs.all {
-            // 输出apk名称为WeiLaiCheng1.0_2018-08-13.apk
-            def fileName = "${defaultConfig.applicationId}_${defaultConfig.versionName}}.apk"
+            // 输出apk名称为WeiLaiCheng1.0.apk
+            def fileName = "${defaultConfig.applicationId}_${defaultConfig.versionName}.apk"
             outputFileName = fileName
         }
     }

@@ -4,12 +4,14 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.TimeUtils;
 import com.ch.myframe.R;
 import com.ch.myframe.base.BaseMvpActivity;
 import com.ch.myframe.bean.User;

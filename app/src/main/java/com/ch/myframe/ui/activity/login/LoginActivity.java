@@ -1,17 +1,15 @@
 package com.ch.myframe.ui.activity.login;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.util.Log;
+import androidx.annotation.NonNull;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.blankj.utilcode.util.TimeUtils;
 import com.ch.myframe.R;
 import com.ch.myframe.base.BaseMvpActivity;
 import com.ch.myframe.bean.User;
@@ -90,7 +88,7 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
         } else {
             mySharedPreferences.clear();
         }
-        Toast.makeText(getBaseContext(), user.getName(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getBaseContext(), user.getResult(), Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
         finish();

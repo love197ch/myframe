@@ -1,33 +1,20 @@
 package com.ch.myframe.ui.activity.login;
 
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
 import android.content.Context;
-import android.text.TextUtils;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.ch.myframe.base.BaseMvpPresenter;
+import com.ch.myframe.bean.User;
 import com.ch.myframe.http.DefaultObserver;
 import com.ch.myframe.http.RetrofitUtils;
 import com.ch.myframe.http.RxSchedulers;
 import com.ch.myframe.response.LoginResponse;
 import com.ch.myframe.service.ApiService;
-import com.ch.myframe.utils.StaticVariable;
 import com.uber.autodispose.AutoDispose;
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider;
 
-import java.util.concurrent.TimeUnit;
-
 import javax.inject.Inject;
-
-import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * @Author: Administrator
@@ -48,13 +35,13 @@ public class LoginPresenter extends BaseMvpPresenter<LoginContract.View> impleme
 //            return;
 //        }
         RetrofitUtils.getInstance().create(ApiService.class)
-                .login("00d91e8e0cca2b76f515926a36db68f5", "13594347817", "123456")
+                .login("1","20")
                 .compose(RxSchedulers.io_main())
                 .as(AutoDispose.autoDisposable(AndroidLifecycleScopeProvider.from((LifecycleOwner) mView)))
-                .subscribe(new DefaultObserver<LoginResponse>((Context) mView) {
+                .subscribe(new DefaultObserver<User>((Context) mView) {
                     @Override
-                    public void onSuccess(LoginResponse result) {
-                        mView.httpCallback(result.getData());
+                    public void onSuccess(User result) {
+                        mView.httpCallback(result);
                     }
 
                     @Override

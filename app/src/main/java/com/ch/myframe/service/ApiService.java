@@ -1,6 +1,7 @@
 package com.ch.myframe.service;
 
 
+import com.ch.myframe.bean.User;
 import com.ch.myframe.response.LoginResponse;
 
 import java.util.List;
@@ -16,11 +17,14 @@ import retrofit2.http.Query;
 
 public interface ApiService {
 
-    @FormUrlEncoded
-    @POST("/login")
-    Observable<LoginResponse> login(@Field("key") String key,
-                                    @Field("phone") String phone,
-                                    @Field("passwd") String passwd);
+//    @FormUrlEncoded
+//    @POST("/login")
+//    Observable<LoginResponse> login(@Field("key") String key,
+//                                    @Field("phone") String phone,
+//                                    @Field("passwd") String passwd);
 
+    @GET("/getSongPoetry")
+    Observable<User> login(@Query("page") String page,
+                           @Query("count") String count);
 
 }

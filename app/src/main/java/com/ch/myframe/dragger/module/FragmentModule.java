@@ -1,7 +1,7 @@
 package com.ch.myframe.dragger.module;
 
 import android.app.Activity;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 import com.ch.myframe.dragger.FragmentScope;
 

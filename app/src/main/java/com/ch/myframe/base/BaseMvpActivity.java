@@ -1,7 +1,7 @@
 package com.ch.myframe.base;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.ch.myframe.MyApplication;
 import com.ch.myframe.dragger.component.ActivityComponent;
